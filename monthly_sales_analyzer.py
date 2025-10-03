@@ -24,27 +24,66 @@ sales_data = [
 
 def total_sales_by_product(data, product_key):
     """Calculates the total sales of a specific product in 30 days."""
-    pass
+    total = 0 
+    for dic in data:
+        if product_key in dic:
+            total += dic[product_key]
+    return total
 
 
 def average_daily_sales(data, product_key):
     """Calculates the average daily sales of a specific product."""
-    pass
+    total = 0
+    for dic in data: 
+        if product_key in dic:
+            total += dic[product_key]
+    return total/len(sales_data)
 
 
 def best_selling_day(data):
     """Finds the day with the highest total sales."""
-    pass
+    highest_total_sales = 0
+    day_w_highest = 0
+    for dic in data:
+        total = 0
+        for k,v in dic.items():
+            if k != "day":
+                total += v
+        if total > highest_total_sales:
+            highest_total_sales = total
+            day_w_highest = dic["day"]
+    return day_w_highest,highest_total_sales
 
 
 def days_above_threshold(data, product_key, threshold):
     """Counts how many days the sales of a product exceeded a given threshold."""
-    pass
+    number_of_days = 0
+    for dayofsales in data:
+        productsalesoftheday = dayofsales[product_key]
+        if productsalesoftheday > threshold:
+            number_of_days += 1
+    return number_of_days
 
 
 def top_product(data):
     """Determines which product had the highest total sales in 30 days."""
-    pass
+    total_sales_a = 0
+    total_sales_b = 0
+    total_sales_c = 0
+    for dic in data:
+        product_a = dic["product_a"]
+        total_sales_a += product_a
+        product_b = dic["product_b"]
+        total_sales_b += product_b
+        product_c = dic["product_c"]
+        total_sales_b += product_c
+    
+    if total_sales_a > total_sales_b and total_sales_a > total_sales_c:
+        return "product_a"
+    if total_sales_b > total_sales_a and total_sales_b > total_sales_c:
+        return "product_b"
+    if total_sales_c > total_sales_a and total_sales_c > total_sales_b:
+        return "product c"
 
 
 
